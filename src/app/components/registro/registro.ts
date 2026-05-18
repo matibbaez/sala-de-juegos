@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -14,6 +14,7 @@ export class RegistroComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef); 
 
   registroForm: FormGroup;
   cargando = false;
@@ -25,7 +26,7 @@ export class RegistroComponent {
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]],
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]],
-      edad: ['', [Validators.required, Validators.min(18), Validators.max(100)]], // Control de edad estricto
+      edad: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]]
     });
@@ -38,6 +39,8 @@ export class RegistroComponent {
     }
 
     this.cargando = true;
+    this.cdr.detectChanges(); 
+
     const { correo, contrasena, nombre, apellido, edad } = this.registroForm.value;
 
     try {
@@ -52,15 +55,18 @@ export class RegistroComponent {
       }
     } finally {
       this.cargando = false;
+      this.cdr.detectChanges(); 
     }
   }
 
   mostrarError(mensaje: string) {
     this.mensajeError = mensaje;
     this.mostrarModalError = true;
+    this.cdr.detectChanges();
   }
 
   cerrarModal() {
     this.mostrarModalError = false;
+    this.cdr.detectChanges(); 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -14,10 +14,12 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef); // Inyectamos el detector de cambios
 
   loginForm: FormGroup;
   cargando = false;
   
+  // Modal de error
   mostrarModalError = false;
   mensajeError = '';
 
@@ -35,6 +37,8 @@ export class LoginComponent {
     }
 
     this.cargando = true;
+    this.cdr.detectChanges(); // Le avisamos a Angular que muestre el spinner
+
     const { correo, contrasena } = this.loginForm.value;
 
     try {
@@ -45,12 +49,13 @@ export class LoginComponent {
       this.mostrarError('Credenciales incorrectas. Verificá tu correo y contraseña.');
     } finally {
       this.cargando = false;
+      this.cdr.detectChanges(); // Le avisamos a Angular que apague el spinner y muestre el modal si hubo error
     }
   }
 
   accesoRapido(tipoUsuario: string) {
     let correo = '';
-    let contrasena = '123456'; 
+    let contrasena = '123456';
 
     switch (tipoUsuario) {
       case 'tester1':
@@ -75,9 +80,11 @@ export class LoginComponent {
   mostrarError(mensaje: string) {
     this.mensajeError = mensaje;
     this.mostrarModalError = true;
+    this.cdr.detectChanges(); // Forzamos la actualización visual del modal
   }
 
   cerrarModal() {
     this.mostrarModalError = false;
+    this.cdr.detectChanges(); // Forzamos la actualización al cerrar
   }
 }
