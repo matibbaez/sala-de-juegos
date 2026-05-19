@@ -14,12 +14,11 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private cdr = inject(ChangeDetectorRef); // Inyectamos el detector de cambios
+  private cdr = inject(ChangeDetectorRef); 
 
   loginForm: FormGroup;
   cargando = false;
   
-  // Modal de error
   mostrarModalError = false;
   mensajeError = '';
 
@@ -37,7 +36,7 @@ export class LoginComponent {
     }
 
     this.cargando = true;
-    this.cdr.detectChanges(); // Le avisamos a Angular que muestre el spinner
+    this.cdr.detectChanges(); 
 
     const { correo, contrasena } = this.loginForm.value;
 
@@ -49,7 +48,7 @@ export class LoginComponent {
       this.mostrarError('Credenciales incorrectas. Verificá tu correo y contraseña.');
     } finally {
       this.cargando = false;
-      this.cdr.detectChanges(); // Le avisamos a Angular que apague el spinner y muestre el modal si hubo error
+      this.cdr.detectChanges(); 
     }
   }
 
@@ -80,11 +79,11 @@ export class LoginComponent {
   mostrarError(mensaje: string) {
     this.mensajeError = mensaje;
     this.mostrarModalError = true;
-    this.cdr.detectChanges(); // Forzamos la actualización visual del modal
+    this.cdr.detectChanges();
   }
 
   cerrarModal() {
     this.mostrarModalError = false;
-    this.cdr.detectChanges(); // Forzamos la actualización al cerrar
+    this.cdr.detectChanges(); 
   }
 }

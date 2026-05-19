@@ -16,11 +16,9 @@ export class AppComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   
-  // Guardamos el usuario activo
   usuarioLogueado: any = null;
 
   ngOnInit() {
-    // Nos suscribimos a los cambios de sesión. Si se loguea o desloguea, Angular se entera al instante.
     this.authService.currentUser$.subscribe(user => {
       this.usuarioLogueado = user;
     });
@@ -32,7 +30,7 @@ export class AppComponent implements OnInit {
 
   async cerrarSesion() {
     await this.authService.cerrarSesion();
-    this.menuAbierto = false; // Cerramos el menú mobile por las dudas
+    this.menuAbierto = false; 
     this.router.navigate(['/login']);
   }
 }
