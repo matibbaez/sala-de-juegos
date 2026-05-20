@@ -1,0 +1,49 @@
+<div class="max-w-3xl mx-auto mt-10 bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-800 flex flex-col h-[600px]">
+  
+  <div class="bg-gray-800 p-4 border-b border-gray-700 flex items-center justify-between">
+    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+      <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+      Chat Global
+    </h2>
+    <span class="text-sm text-gray-400">Sala Pública</span>
+  </div>
+
+  <div #contenedorMensajes class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-950">
+    <div *ngFor="let msg of mensajes" 
+         class="flex flex-col" 
+         [ngClass]="{'items-end': msg.usuario_id === usuarioActual?.user?.id, 'items-start': msg.usuario_id !== usuarioActual?.user?.id}">
+      
+      <span class="text-xs text-gray-400 mb-1 px-1">
+        {{ msg.usuario_id === usuarioActual?.user?.id ? 'Yo' : msg.nombre_usuario }}
+      </span>
+      
+      <div class="max-w-[75%] px-4 py-2 rounded-2xl shadow-md"
+           [ngClass]="msg.usuario_id === usuarioActual?.user?.id ? 'bg-blue-600 text-white rounded-br-none' : 'bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700'">
+        {{ msg.mensaje }}
+      </div>
+
+      <span class="text-[10px] text-gray-500 mt-1 px-1">
+        {{ msg.creado_en | date:'shortTime' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="bg-gray-800 p-4 border-t border-gray-700">
+    <form (ngSubmit)="enviar()" class="flex gap-2">
+      <input type="text" 
+             [(ngModel)]="nuevoMensaje" 
+             name="mensaje"
+             autocomplete="off"
+             placeholder="Escribí un mensaje..." 
+             class="flex-1 bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+             [disabled]="enviando">
+      
+      <button type="submit" 
+              [disabled]="!nuevoMensaje.trim() || enviando"
+              class="bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-500 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center gap-2">
+        <span *ngIf="enviando">...</span>
+        <span *ngIf="!enviando">Enviar</span>
+      </button>
+    </form>
+  </div>
+</div>
