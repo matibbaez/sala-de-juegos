@@ -28,7 +28,11 @@ export class RegistroComponent {
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$')]],
       edad: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
       correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]]
+      contrasena: ['', [
+        Validators.required, 
+        Validators.minLength(6),
+        Validators.pattern('^(?=.*[A-Z]).+$') 
+      ]]
     });
   }
 
