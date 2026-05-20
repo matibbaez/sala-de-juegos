@@ -65,4 +65,9 @@ export class AuthService {
     const { error } = await this.supabase.auth.signOut();
     if (error) throw error;
   }
+
+  async obtenerSesion() {
+    const { data } = await this.supabase.auth.getSession();
+    return data.session;
+  }
 }
