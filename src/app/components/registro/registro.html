@@ -1,8 +1,107 @@
-<div class="flex flex-col items-center justify-center flex-1 w-full max-w-md mx-auto mt-10 md:mt-20">
-  <div class="bg-slate-900 p-8 rounded-sm shadow-xl border border-gray-800 w-full text-center">
-    <svg class="mx-auto h-12 w-12 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-    <h1 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Registro</h1>
-    <p class="text-slate-400 mb-6">El formulario de creación de cuentas se desarrollará en el Sprint 2.</p>
-    <div class="h-1 w-16 bg-red-600 mx-auto rounded-full"></div>
+<div class="max-w-6xl mx-auto mt-10 p-6 font-sans">
+  
+  <div class="flex flex-col md:flex-row justify-between items-center bg-gray-900 p-6 rounded-2xl border border-gray-800 shadow-xl mb-10 gap-4 md:gap-0">
+    <div class="text-center md:text-left">
+      <h1 class="text-3xl font-black text-white tracking-tight uppercase">Crear Cuenta</h1>
+      <p class="text-gray-400 mt-1">Registrate para acceder a la sala de juegos</p>
+    </div>
+    <a routerLink="/home" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 px-6 py-2.5 rounded-lg text-sm font-bold transition-colors w-full md:w-auto shadow-md text-center cursor-pointer">
+      Volver al Inicio
+    </a>
+  </div>
+
+  <div class="max-w-lg mx-auto bg-gray-900 p-8 rounded-2xl border border-gray-700 shadow-2xl relative">
+    
+    <form [formGroup]="registroForm" (ngSubmit)="registrar()" class="space-y-5">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Nombre</label>
+          <input type="text" formControlName="nombre" 
+                 [ngClass]="{'border-red-500 focus:border-red-500 focus:ring-red-500': registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched}"
+                 class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
+          <div *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched" class="text-red-500 text-xs mt-1.5 font-medium">
+            <span *ngIf="registroForm.get('nombre')?.errors?.['required']">El nombre es requerido.</span>
+            <span *ngIf="registroForm.get('nombre')?.errors?.['pattern'] || registroForm.get('nombre')?.errors?.['minlength']">Ingresá un nombre válido.</span>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Apellido</label>
+          <input type="text" formControlName="apellido" 
+                 [ngClass]="{'border-red-500 focus:border-red-500 focus:ring-red-500': registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched}"
+                 class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
+          <div *ngIf="registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched" class="text-red-500 text-xs mt-1.5 font-medium">
+            <span *ngIf="registroForm.get('apellido')?.errors?.['required']">El apellido es requerido.</span>
+            <span *ngIf="registroForm.get('apellido')?.errors?.['pattern'] || registroForm.get('apellido')?.errors?.['minlength']">Ingresá un apellido válido.</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Edad</label>
+        <input type="number" formControlName="edad" 
+               [ngClass]="{'border-red-500 focus:border-red-500 focus:ring-red-500': registroForm.get('edad')?.invalid && registroForm.get('edad')?.touched}"
+               class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
+        <div *ngIf="registroForm.get('edad')?.invalid && registroForm.get('edad')?.touched" class="text-red-500 text-xs mt-1.5 font-medium">
+          <span *ngIf="registroForm.get('edad')?.errors?.['required']">La edad es requerida.</span>
+          <span *ngIf="registroForm.get('edad')?.errors?.['min']">Tenés que ser mayor de 18 años.</span>
+          <span *ngIf="registroForm.get('edad')?.errors?.['max']">Ingresá una edad realista (máximo 100).</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Correo Electrónico</label>
+        <input type="email" formControlName="correo" 
+               [ngClass]="{'border-red-500 focus:border-red-500 focus:ring-red-500': registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched}"
+               class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
+        <div *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched" class="text-red-500 text-xs mt-1.5 font-medium">
+          <span *ngIf="registroForm.get('correo')?.errors?.['required']">El correo es requerido.</span>
+          <span *ngIf="registroForm.get('correo')?.errors?.['email']">El formato de correo no es válido.</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Contraseña</label>
+        <input type="password" formControlName="contrasena" 
+               [ngClass]="{'border-red-500 focus:border-red-500 focus:ring-red-500': registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched}"
+               class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner" 
+               placeholder="Mínimo 6 caracteres y 1 mayúscula">
+        
+        <div *ngIf="registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched" class="text-red-500 text-xs mt-1.5 font-medium">
+          <span *ngIf="registroForm.get('contrasena')?.errors?.['required']" class="block">La contraseña es requerida.</span>
+          <span *ngIf="registroForm.get('contrasena')?.errors?.['minlength']" class="block">Debe tener al menos 6 caracteres.</span>
+          <span *ngIf="registroForm.get('contrasena')?.errors?.['pattern'] && !registroForm.get('contrasena')?.errors?.['minlength']" class="block">Debe contener al menos una letra mayúscula.</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="cargando" 
+              class="w-full mt-4 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-500 text-white font-bold py-4 px-4 rounded-lg transition-all shadow-lg active:scale-95 uppercase tracking-widest flex justify-center items-center gap-3">
+        <span *ngIf="cargando">
+          <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        </span>
+        {{ cargando ? 'Procesando...' : 'Registrarse' }}
+      </button>
+
+      <p class="text-center text-sm text-gray-500 mt-6">
+        ¿Ya tenés cuenta? <a routerLink="/login" class="text-blue-400 hover:text-blue-300 font-bold transition-colors cursor-pointer">Iniciá sesión acá</a>
+      </p>
+
+    </form>
+  </div>
+</div>
+
+<div *ngIf="mostrarModalError" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+  <div class="bg-gray-900 border border-red-900 rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-fade-in">
+    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-950/50 mb-6 border border-red-900">
+      <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Error de Registro</h3>
+    <p class="text-gray-400 text-sm mb-8">{{ mensajeError }}</p>
+    <button (click)="cerrarModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-xl transition-colors border border-gray-700 shadow-md">
+      Entendido
+    </button>
   </div>
 </div>

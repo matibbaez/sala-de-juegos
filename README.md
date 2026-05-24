@@ -1,59 +1,31 @@
-# SalaDeJuegos
+# 🎮 Sala de Juegos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+Este proyecto es una Single Page Application (SPA) desarrollada en **Angular** como trabajo práctico. Consiste en una plataforma interactiva con sistema de autenticación, perfiles de usuario y gestión de base de datos en la nube.
 
-## Development server
+## 🚀 Tecnologías Utilizadas
 
-To start a local development server, run:
+* **Framework:** Angular (Standalone Components, Zoneless Change Detection).
+* **Estilos:** Tailwind CSS (Utility-first approach para diseño responsivo y estética arcade).
+* **Backend as a Service:** Supabase (Autenticación y base de datos PostgreSQL).
+* **Despliegue:** Vercel.
 
-```bash
-ng serve
-```
+## 📋 Características y Sprints
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Sprint 1: Arquitectura Base y Ruteo
+* Estructura modular de la aplicación implementando navegación SPA mediante `<router-outlet>`.
+* Diseño de Navbar responsivo y menús móviles.
+* **Sección "Quién Soy":** Consumo asíncrono de la API pública de GitHub utilizando `HttpClient` de Angular, sincronizado con la interfaz mediante `ChangeDetectorRef`.
 
-## Code scaffolding
+### Sprint 2: Autenticación y Formularios
+* Integración de **Supabase Auth** para la gestión de usuarios.
+* Proceso de registro seguro con inserción doble: creación de credenciales y almacenamiento de perfil (nombre, edad) en tabla relacional.
+* Validación síncrona y estricta de datos en el frontend utilizando **Reactive Forms** de Angular.
+* Gestión de estado de sesión global y reactiva utilizando `BehaviorSubject` (RxJS).
+* **Funcionalidad de Acceso Rápido** para agilizar pruebas de QA.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ⚙️ Instalación y Configuración Local
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Clonar el repositorio.
+2. Instalar las dependencias del proyecto:
+   ```bash
+   npm install

@@ -1,75 +1,85 @@
-<div class="w-full max-w-5xl mx-auto mt-6 bg-slate-900 rounded-sm shadow-xl border border-gray-800 p-8">
+<div class="w-full max-w-5xl mx-auto mt-6 bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 p-8 font-sans">
   <div class="flex flex-col md:flex-row gap-10">
     
-    <div class="w-full md:w-2/5 p-8 border-b md:border-b-0 md:border-r border-gray-800 flex flex-col items-center text-center">
+    <div class="w-full md:w-2/5 p-6 md:p-8 border-b md:border-b-0 md:border-r border-gray-800 flex flex-col items-center text-center bg-gray-950/50 rounded-2xl md:rounded-none md:rounded-l-2xl">
       
       <div *ngIf="cargando" class="flex flex-col items-center justify-center py-24">
-        <svg class="animate-spin h-12 w-12 text-red-500 mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg class="animate-spin h-12 w-12 text-blue-500 mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <span class="text-slate-400 font-medium text-sm tracking-wide">Cargando base de datos espacial...</span>
+        <span class="text-gray-400 font-medium text-sm tracking-wide">Cargando base de datos espacial...</span>
       </div>
 
       <div *ngIf="!cargando && perfilGithub" class="w-full flex flex-col items-center">
-        <img [src]="perfilGithub.avatar_url" alt="Avatar" class="w-40 h-40 rounded-full shadow-lg border-4 border-slate-900 object-cover p-1 bg-red-600 mb-6">
+        <img [src]="perfilGithub.avatar_url" alt="Avatar" class="w-40 h-40 rounded-full shadow-2xl border-4 border-gray-900 object-cover p-1 bg-blue-600 mb-6">
         
-        <h2 class="text-2xl font-bold text-white tracking-tight">{{ perfilGithub.name || 'Matías Baez Caneda' }}</h2>
-        <p class="text-red-400 font-medium mb-6">{{ perfilGithub.login }}</p>
+        <h2 class="text-2xl font-black text-white tracking-tight">{{ perfilGithub.name || 'Matías Baez Caneda' }}</h2>
+        <p class="text-blue-400 font-bold mb-6 tracking-wide">{{ perfilGithub.login }}</p>
 
-        <div *ngIf="perfilGithub.bio" class="text-sm text-slate-400 mb-8 italic px-4">
+        <div *ngIf="perfilGithub.bio" class="text-sm text-gray-400 mb-8 italic px-4">
           "{{ perfilGithub.bio }}"
         </div>
 
-        <div class="w-full flex flex-col gap-4 text-sm text-slate-300 text-left bg-slate-950 border border-gray-800 p-6 rounded-sm mb-10">
+        <div class="w-full flex flex-col gap-4 text-sm text-gray-300 text-left bg-gray-900 border border-gray-700 p-6 rounded-xl mb-10 shadow-inner">
           <div class="flex items-center gap-4">
-            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <svg class="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             <span class="truncate">{{ perfilGithub.location || 'No especificada' }}</span>
           </div>
           <div class="flex items-center gap-4">
-            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-            <span>Repositorios Públicos: <span class="text-white font-semibold">{{ perfilGithub.public_repos }}</span></span>
+            <svg class="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <span>Repositorios Públicos: <span class="text-white font-bold">{{ perfilGithub.public_repos }}</span></span>
           </div>
         </div>
 
-        <a [href]="perfilGithub.html_url" target="_blank" class="w-full px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-sm transition-all shadow-md font-semibold tracking-wide text-sm">
+        <a [href]="perfilGithub.html_url" target="_blank" class="w-full px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all shadow-lg hover:shadow-blue-500/20 active:scale-95 font-bold tracking-widest text-sm uppercase">
           Ver perfil en GitHub
         </a>
       </div>
       
       <div *ngIf="!cargando && !perfilGithub" class="flex flex-col items-center justify-center py-24 text-center">
         <svg class="h-12 w-12 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-        <span class="text-slate-300 font-medium">Error de conexión de red espacial.</span>
+        <span class="text-gray-400 font-medium">Error de conexión de red espacial.</span>
       </div>
 
     </div>
 
-    <div class="w-full md:w-3/5 p-8 flex flex-col justify-center">
-      <h1 class="text-4xl font-extrabold text-white mb-6 tracking-tight">Sobre Mí</h1>
-      <p class="text-slate-400 mb-10 leading-relaxed text-lg">
+    <div class="w-full md:w-3/5 p-4 md:p-8 flex flex-col justify-center">
+      <h1 class="text-4xl font-black text-white mb-6 tracking-tight uppercase">Sobre Mí</h1>
+      <p class="text-gray-400 mb-10 leading-relaxed text-lg">
         Soy estudiante de la Tecnicatura Universitaria en Programación y desarrollador web. Este proyecto es la "Sala de Juegos", desarrollada en Angular cumpliendo con los requisitos del TP.
       </p>
       
-      <div class="bg-slate-950 border border-gray-800 p-8 rounded-sm">
-        <h3 class="text-2xl font-bold text-white mb-3">Mi Juego Propio: Secuencia Lógica</h3>
-        <p class="text-slate-400 leading-relaxed mb-6">
-          Este juego está diseñado para evaluar la capacidad cognitiva y la memoria a corto plazo del jugador, basándose en la mecánica de memorización de patrones progresivos.
+      <div class="bg-gray-950 border border-gray-800 p-8 rounded-2xl shadow-inner relative overflow-hidden">
+        <div class="absolute -right-10 -top-10 opacity-5">
+          <svg class="w-40 h-40 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4.2l6.2 12.4H5.8L12 6.2z"/></svg>
+        </div>
+
+        <h3 class="text-2xl font-bold text-white mb-3 relative z-10">Mi Juego Propio: <span class="text-blue-400">Reflejos en la Red</span></h3>
+        <p class="text-gray-400 leading-relaxed mb-6 relative z-10">
+          Este juego de acción rápida está diseñado para poner a prueba el tiempo de reacción puro del jugador, simulando la velocidad y precisión necesarias para meter una volea en la cancha.
         </p>
         
-        <div class="text-slate-300 leading-relaxed bg-gray-900 border border-gray-800 p-6 rounded-sm">
-          <span class="font-semibold text-white tracking-wide text-sm uppercase">Reglas y Mecánica:</span> 
-          <ul class="list-none mt-4 space-y-3">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>El sistema iluminará paneles en un orden específico. El jugador debe repetir la secuencia.</span>
+        <div class="text-gray-300 leading-relaxed bg-gray-900 border border-gray-700 p-6 rounded-xl relative z-10 shadow-md">
+          <span class="font-bold text-white tracking-widest text-xs uppercase mb-4 block">Reglas y Mecánica:</span> 
+          <ul class="list-none space-y-4">
+            <li class="flex items-start gap-4">
+              <div class="bg-blue-900/50 p-1.5 rounded-lg border border-blue-800 shrink-0">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <span class="pt-0.5 text-sm">Aparecerá un objetivo en posiciones aleatorias de la cancha. El jugador debe impactarlo antes de que se agote el tiempo.</span>
             </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-              <span><strong>Victoria:</strong> Alcanzar el nivel 10 de secuencia.</span>
+            <li class="flex items-start gap-4">
+              <div class="bg-green-900/50 p-1.5 rounded-lg border border-green-800 shrink-0">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <span class="pt-0.5 text-sm"><strong class="text-green-400 font-bold">Progresión:</strong> Cada acierto suma puntos y reduce los milisegundos disponibles para el próximo impacto.</span>
             </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <span><strong>Derrota:</strong> Clic incorrecto en la secuencia.</span>
+            <li class="flex items-start gap-4">
+              <div class="bg-red-900/50 p-1.5 rounded-lg border border-red-800 shrink-0">
+                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </div>
+              <span class="pt-0.5 text-sm"><strong class="text-red-400 font-bold">Derrota:</strong> Si el jugador cliquea fuera de la pelota o el tiempo límite se agota, pierde una de sus 3 vidas.</span>
             </li>
           </ul>
         </div>

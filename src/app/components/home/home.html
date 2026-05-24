@@ -1,11 +1,95 @@
-<div class="flex flex-col items-center justify-center flex-1 w-full max-w-4xl mx-auto mt-10 md:mt-20">
-  <div class="bg-slate-900 p-10 md:p-16 rounded-sm shadow-xl border border-gray-800 w-full text-center">
+<div class="max-w-6xl mx-auto mt-10 p-6 font-sans">
+  
+  <div class="flex flex-col md:flex-row justify-between items-center bg-gray-900 p-6 rounded-2xl border border-gray-800 shadow-xl mb-10 gap-4 md:gap-0 text-center md:text-left">
+    <div>
+      <h1 class="text-3xl font-black text-white tracking-tight">SALA DE JUEGOS</h1>
+      <p class="text-gray-400 mt-1">Plataforma de entretenimiento</p>
+    </div>
+
+    <div *ngIf="usuarioActual" class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full md:w-auto justify-center">
+      <div class="text-center md:text-right">
+        <p class="text-xs text-gray-500 uppercase tracking-widest">Jugador</p>
+        <p class="text-lg font-bold text-white">{{ nombreUsuario }}</p>
+      </div>
+      <button (click)="cerrarSesion()" class="w-full sm:w-auto bg-red-900/50 hover:bg-red-800 text-red-200 border border-red-700 font-bold py-2 px-6 rounded-lg transition-colors">
+        Salir
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!usuarioActual" class="text-center bg-gray-900 p-16 rounded-2xl border border-gray-800 shadow-xl">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20 mx-auto text-gray-600 mb-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+    </svg>
+    <h2 class="text-2xl font-bold text-white mb-4">Acceso Restringido</h2>
+    <p class="text-gray-400 mb-8 max-w-md mx-auto">Para acceder a la sala de chat y competir en los juegos, es necesario tener una cuenta registrada en la plataforma.</p>
+    <div class="flex justify-center gap-4">
+      <a routerLink="/login" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-lg">Iniciar Sesión</a>
+      <a routerLink="/registro" class="bg-gray-800 hover:bg-gray-700 text-white border border-gray-600 font-bold py-3 px-8 rounded-lg transition-colors">Registrarse</a>
+    </div>
+  </div>
+
+  <div *ngIf="usuarioActual" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     
-    <svg class="mx-auto h-16 w-16 text-red-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-    
-    <h1 class="text-3xl font-extrabold text-white mb-2 uppercase tracking-wide">Panel Principal</h1>
-    <p class="text-slate-400 mb-8 max-w-lg mx-auto">La interfaz de juegos y las estadísticas de cada jugador estarán disponibles a partir del Sprint 2.</p>
-    
-    <div class="h-1 w-20 bg-red-600 mx-auto rounded-full"></div>
+    <a routerLink="/chat" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-blue-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.84 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Sala de Chat</h3>
+      <p class="text-gray-500 text-sm">Conectate con otros jugadores en tiempo real.</p>
+    </a>
+
+    <a routerLink="/ahorcado" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-green-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Ahorcado</h3>
+      <p class="text-gray-500 text-sm">Adiviná la palabra oculta antes de quedarte sin intentos.</p>
+    </a>
+
+    <a routerLink="/mayor-menor" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-red-500 hover:shadow-2xl hover:shadow-red-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-red-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Mayor o Menor</h3>
+      <p class="text-gray-500 text-sm">Predecí si la próxima carta será más alta o más baja.</p>
+    </a>
+
+    <a routerLink="/preguntados" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-purple-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Preguntados</h3>
+      <p class="text-gray-500 text-sm">Adiviná la bandera correcta y demostrá tu conocimiento.</p>
+    </a>
+
+    <a routerLink="/reflejos" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-orange-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Reflejos en la Red</h3>
+      <p class="text-gray-500 text-sm">Poné a prueba tu velocidad de reacción impactando el objetivo.</p>
+    </a>
+
+    <a routerLink="/resultados" class="group bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/10 transition-all cursor-pointer flex flex-col items-center text-center">
+      <div class="bg-gray-950 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform shadow-inner">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-2">Resultados</h3>
+      <p class="text-gray-500 text-sm">Consultá los récords históricos y las clasificaciones globales.</p>
+    </a>
+
   </div>
 </div>
