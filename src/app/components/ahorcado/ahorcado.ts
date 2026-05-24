@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { ResultadosService } from '../../services/resultados.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ahorcado',
@@ -13,6 +14,7 @@ export class AhorcadoComponent implements OnInit {
   private authService = inject(AuthService);
   private resultadosService = inject(ResultadosService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   abecedario: string[] = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
   palabras: string[] = ['DESARROLLADOR', 'FRONTEND', 'BACKEND', 'FULLSTACK', 'COMPONENTES', 'OBSERVABLE', 'FORMULARIOS', 'FRAMEWORK'];
@@ -108,5 +110,12 @@ export class AhorcadoComponent implements OnInit {
     }
     
     this.cdr.detectChanges();
+  }
+
+  async volverAlHome() {
+    if (!this.juegoTerminado && this.palabraSecreta) {
+      await this.finalizarJuego(false);
+    }
+    this.router.navigate(['/home']);
   }
 }

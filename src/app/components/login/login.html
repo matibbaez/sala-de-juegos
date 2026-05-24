@@ -1,65 +1,70 @@
-<div class="flex flex-col items-center justify-center flex-1 w-full max-w-md mx-auto mt-6 mb-10 relative">
+<div class="max-w-6xl mx-auto mt-10 p-6 font-sans">
   
-  <div class="bg-slate-900 p-8 md:p-10 rounded-sm shadow-xl border border-gray-800 w-full">
-    
-    <div class="text-center mb-8">
-      <svg class="mx-auto h-12 w-12 text-red-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-      <h1 class="text-2xl font-bold text-white uppercase tracking-wide">Acceso al Sistema</h1>
-      <div class="h-1 w-12 bg-red-600 mx-auto rounded-full mt-3"></div>
+  <div class="flex flex-col md:flex-row justify-between items-center bg-gray-900 p-6 rounded-2xl border border-gray-800 shadow-xl mb-10 gap-4 md:gap-0">
+    <div class="text-center md:text-left">
+      <h1 class="text-3xl font-black text-white tracking-tight uppercase">Acceso al Sistema</h1>
+      <p class="text-gray-400 mt-1">Iniciá sesión para jugar y chatear</p>
     </div>
+    <a routerLink="/home" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 px-6 py-2.5 rounded-lg text-sm font-bold transition-colors w-full md:w-auto shadow-md text-center cursor-pointer">
+      Volver al Inicio
+    </a>
+  </div>
 
-    <div class="mb-6 p-4 bg-slate-950 border border-gray-800 rounded-sm">
-      <p class="text-xs text-slate-500 uppercase tracking-widest text-center mb-3">Acceso Rápido</p>
-      <div class="grid grid-cols-3 gap-2">
-        <button (click)="accesoRapido('tester1')" type="button" class="bg-gray-800 hover:bg-gray-700 text-slate-300 hover:text-white text-xs font-medium py-2 rounded-sm transition-colors border border-gray-700 hover:border-red-500">
+  <div class="max-w-md mx-auto bg-gray-900 p-8 rounded-2xl border border-gray-700 shadow-2xl relative">
+    
+    <div class="mb-8 p-5 bg-gray-950 border border-gray-800 rounded-xl shadow-inner">
+      <p class="text-xs text-gray-500 uppercase tracking-widest text-center mb-4">Acceso Rápido</p>
+      <div class="grid grid-cols-3 gap-3">
+        <button (click)="accesoRapido('tester1')" type="button" class="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-xs font-bold py-2.5 rounded-lg transition-colors border border-gray-700 hover:border-blue-500 shadow-sm">
           Jugador 1
         </button>
-        <button (click)="accesoRapido('tester2')" type="button" class="bg-gray-800 hover:bg-gray-700 text-slate-300 hover:text-white text-xs font-medium py-2 rounded-sm transition-colors border border-gray-700 hover:border-red-500">
+        <button (click)="accesoRapido('tester2')" type="button" class="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-xs font-bold py-2.5 rounded-lg transition-colors border border-gray-700 hover:border-blue-500 shadow-sm">
           Jugador 2
         </button>
-        <button (click)="accesoRapido('tester3')" type="button" class="bg-gray-800 hover:bg-gray-700 text-slate-300 hover:text-white text-xs font-medium py-2 rounded-sm transition-colors border border-gray-700 hover:border-red-500">
+        <button (click)="accesoRapido('tester3')" type="button" class="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-xs font-bold py-2.5 rounded-lg transition-colors border border-gray-700 hover:border-blue-500 shadow-sm">
           Jugador 3
         </button>
       </div>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" class="space-y-5">
-      
       <div>
-        <label class="block text-sm font-medium text-slate-400 mb-1">Correo Electrónico</label>
-        <input type="email" formControlName="correo" class="w-full bg-slate-950 border border-gray-700 rounded-sm px-4 py-2 text-white focus:outline-none focus:border-red-500 transition-colors">
+        <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Correo Electrónico</label>
+        <input type="email" formControlName="correo" 
+               class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-slate-400 mb-1">Contraseña</label>
-        <input type="password" formControlName="contrasena" class="w-full bg-slate-950 border border-gray-700 rounded-sm px-4 py-2 text-white focus:outline-none focus:border-red-500 transition-colors">
+        <label class="block text-sm font-medium text-gray-400 mb-1 uppercase tracking-wider">Contraseña</label>
+        <input type="password" formControlName="contrasena" 
+               class="w-full bg-gray-950 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors shadow-inner">
       </div>
 
-      <button type="submit" [disabled]="cargando" class="w-full mt-6 bg-red-600 hover:bg-red-500 disabled:bg-gray-700 text-white font-bold py-3 px-4 rounded-sm transition-colors uppercase tracking-widest text-sm flex justify-center items-center gap-2">
+      <button type="submit" [disabled]="cargando" 
+              class="w-full mt-2 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-500 text-white font-bold py-3.5 px-4 rounded-lg transition-all shadow-lg active:scale-95 uppercase tracking-widest flex justify-center items-center gap-3">
         <span *ngIf="cargando">
           <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
         </span>
         {{ cargando ? 'Iniciando...' : 'Entrar' }}
       </button>
 
-      <p class="text-center text-sm text-slate-500 mt-6">
-        ¿No tenés cuenta? <a routerLink="/registro" class="text-red-400 hover:text-red-300 font-medium transition-colors">Registrate acá</a>
+      <p class="text-center text-sm text-gray-500 mt-6">
+        ¿No tenés cuenta? <a routerLink="/registro" class="text-blue-400 hover:text-blue-300 font-bold transition-colors cursor-pointer">Registrate acá</a>
       </p>
-
     </form>
   </div>
 </div>
 
-<div *ngIf="mostrarModalError" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-  <div class="bg-slate-900 border border-red-900 rounded-sm shadow-2xl max-w-sm w-full p-6 text-center animate-fade-in">
-    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-950/50 mb-4 border border-red-900">
-      <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+<div *ngIf="mostrarModalError" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+  <div class="bg-gray-900 border border-red-900 rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-fade-in">
+    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-950/50 mb-6 border border-red-900">
+      <svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
       </svg>
     </div>
-    <h3 class="text-lg font-bold text-white mb-2 uppercase tracking-wide">Error de Acceso</h3>
-    <p class="text-slate-300 text-sm mb-6">{{ mensajeError }}</p>
-    <button (click)="cerrarModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-2 px-4 rounded-sm transition-colors border border-gray-700">
+    <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Error de Acceso</h3>
+    <p class="text-gray-400 text-sm mb-8">{{ mensajeError }}</p>
+    <button (click)="cerrarModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-xl transition-colors border border-gray-700 shadow-md">
       Reintentar
     </button>
   </div>

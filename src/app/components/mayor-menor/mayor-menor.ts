@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { ResultadosService } from '../../services/resultados.service';
+import { Router } from '@angular/router'; 
 
 interface Carta {
   valor: number;
@@ -20,6 +21,7 @@ export class MayorMenorComponent implements OnInit {
   private authService = inject(AuthService);
   private resultadosService = inject(ResultadosService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router); 
 
   mazo: Carta[] = [];
   cartaActual!: Carta;
@@ -132,5 +134,12 @@ export class MayorMenorComponent implements OnInit {
         { cartas_restantes: this.mazo.length }
       );
     }
+  }
+
+  async volverAlHome() {
+    if (!this.juegoTerminado && this.cartaActual) {
+      await this.finalizarJuego();
+    }
+    this.router.navigate(['/home']);
   }
 }

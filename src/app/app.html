@@ -1,21 +1,27 @@
-<nav class="bg-gray-950 text-white shadow-lg border-b border-gray-800">
+<nav class="bg-gray-950 text-white shadow-lg border-b border-gray-800 z-50 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       
-      <a routerLink="/home" class="text-xl font-bold tracking-widest uppercase text-white hover:text-red-400 transition-colors">Sala de Juegos</a>
+      <a routerLink="/home" class="text-xl font-black tracking-widest uppercase text-white hover:text-blue-400 transition-colors flex items-center gap-2">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+        </span>
+        Sala de Juegos
+      </a>
       
       <div class="hidden md:flex items-center space-x-6">
-        <a routerLink="/home" class="hover:text-red-400 transition-colors duration-200 uppercase text-sm font-medium tracking-wide">Home</a>
-        <a routerLink="/quien-soy" class="hover:text-red-400 transition-colors duration-200 uppercase text-sm font-medium tracking-wide">Quién Soy</a>
+        <a routerLink="/home" class="hover:text-blue-400 transition-colors duration-200 uppercase text-sm font-bold tracking-wide">Home</a>
+        <a routerLink="/quien-soy" class="hover:text-blue-400 transition-colors duration-200 uppercase text-sm font-bold tracking-wide">Quién Soy</a>
         
         <ng-container *ngIf="!usuarioLogueado">
-          <a routerLink="/login" class="hover:text-red-400 transition-colors duration-200 uppercase text-sm font-medium tracking-wide">Login</a>
-          <a routerLink="/registro" class="bg-red-600 hover:bg-red-500 text-white px-4 py-1.5 rounded-sm transition-colors duration-200 uppercase text-sm font-bold tracking-wide">Registro</a>
+          <a routerLink="/login" class="hover:text-blue-400 transition-colors duration-200 uppercase text-sm font-bold tracking-wide">Login</a>
+          <a routerLink="/registro" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg transition-colors duration-200 uppercase text-sm font-bold tracking-wide shadow-md">Registro</a>
         </ng-container>
 
         <ng-container *ngIf="usuarioLogueado">
-          <span class="text-slate-400 text-sm font-medium border-l border-gray-800 pl-6">{{ usuarioLogueado.email }}</span>
-          <button (click)="cerrarSesion()" class="hover:text-red-400 transition-colors duration-200 uppercase text-sm font-medium tracking-wide flex items-center gap-1">
+          <span class="text-gray-400 text-sm font-medium border-l border-gray-800 pl-6">{{ usuarioLogueado.email }}</span>
+          <button (click)="cerrarSesion()" class="hover:text-red-400 transition-colors duration-200 uppercase text-sm font-bold tracking-wide flex items-center gap-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
             Salir
           </button>
@@ -23,7 +29,7 @@
       </div>
 
       <div class="md:hidden flex items-center">
-        <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-sm hover:bg-gray-800">
+        <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-lg hover:bg-gray-800 transition-colors">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path *ngIf="!menuAbierto" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             <path *ngIf="menuAbierto" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -34,19 +40,20 @@
     </div>
   </div>
 
-  <div *ngIf="menuAbierto" class="md:hidden bg-gray-900 border-t border-gray-800">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
-      <a routerLink="/home" (click)="toggleMenu()" class="block px-3 py-2 rounded-sm text-base font-medium hover:bg-gray-800 hover:text-red-400 transition-colors uppercase tracking-wide">Home</a>
-      <a routerLink="/quien-soy" (click)="toggleMenu()" class="block px-3 py-2 rounded-sm text-base font-medium hover:bg-gray-800 hover:text-red-400 transition-colors uppercase tracking-wide">Quién Soy</a>
+  <div *ngIf="menuAbierto" class="md:hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-2xl">
+    <div class="px-4 pt-3 pb-4 space-y-2 flex flex-col">
+      <a routerLink="/home" (click)="toggleMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-800 hover:text-blue-400 transition-colors uppercase tracking-wide">Home</a>
+      <a routerLink="/quien-soy" (click)="toggleMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-800 hover:text-blue-400 transition-colors uppercase tracking-wide">Quién Soy</a>
       
       <ng-container *ngIf="!usuarioLogueado">
-        <a routerLink="/login" (click)="toggleMenu()" class="block px-3 py-2 rounded-sm text-base font-medium hover:bg-gray-800 hover:text-red-400 transition-colors uppercase tracking-wide">Login</a>
-        <a routerLink="/registro" (click)="toggleMenu()" class="block px-3 py-2 rounded-sm text-base font-medium hover:bg-gray-800 text-red-500 transition-colors uppercase tracking-wide">Registro</a>
+        <a routerLink="/login" (click)="toggleMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-bold hover:bg-gray-800 hover:text-blue-400 transition-colors uppercase tracking-wide">Login</a>
+        <a routerLink="/registro" (click)="toggleMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-bold bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 transition-colors uppercase tracking-wide">Registro</a>
       </ng-container>
 
       <ng-container *ngIf="usuarioLogueado">
-        <div class="px-3 py-2 text-sm text-slate-500 border-t border-gray-800 mt-2">{{ usuarioLogueado.email }}</div>
-        <button (click)="cerrarSesion()" class="w-full text-left px-3 py-2 rounded-sm text-base font-medium hover:bg-gray-800 hover:text-red-400 transition-colors uppercase tracking-wide flex items-center gap-2">
+        <div class="px-3 py-3 text-xs text-gray-500 border-t border-gray-800 mt-2 tracking-widest uppercase">Sesión activa</div>
+        <div class="px-3 pb-3 text-sm text-gray-300 font-medium">{{ usuarioLogueado.email }}</div>
+        <button (click)="cerrarSesion()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-red-400 hover:bg-red-900/30 transition-colors uppercase tracking-wide flex items-center gap-2">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
           Cerrar Sesión
         </button>
@@ -55,6 +62,6 @@
   </div>
 </nav>
 
-<main class="min-h-screen bg-slate-950 text-white flex flex-col p-4 md:p-8">
+<main class="min-h-screen bg-gray-950 text-white flex flex-col p-4 md:p-8">
   <router-outlet></router-outlet>
 </main>
