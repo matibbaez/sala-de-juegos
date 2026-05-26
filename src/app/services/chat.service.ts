@@ -12,10 +12,19 @@ export class ChatService {
   private mensajesSubject = new BehaviorSubject<any[]>([]);
   mensajes$ = this.mensajesSubject.asObservable();
 
+  private chatIniciado = false; 
+
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+  }
+
+  inicializarChat() {
+    if (this.chatIniciado) return;
+
+    this.supabase.removeAllChannels(); 
     this.cargarMensajesViejos();
     this.escucharMensajesNuevos();
+    this.chatIniciado = true;
   }
 
   async cargarMensajesViejos() {
@@ -36,18 +45,27 @@ export class ChatService {
     this.supabase
       .channel('chat_publico')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensajes' }, (payload) => {
-        
-        console.log('mensaje vivo', payload.new); 
-        
         const mensajesActuales = this.mensajesSubject.value;
-        this.mensajesSubject.next([...mensajesActuales, payload.new]);
+        
+        if (!mensajesActuales.find(m => m.id === payload.new['id'])) {
+           this.mensajesSubject.next([...mensajesActuales, payload.new]);
+        }
       })
-      .subscribe((status) => {
-        console.log('Estado de conexión a Supabase:', status); 
-      });
+      .subscribe();
   }
 
   async enviarMensaje(usuarioId: string, nombreUsuario: string, texto: string) {
+    const mensajeLocal = {
+      id: Math.random(),
+      usuario_id: usuarioId,
+      nombre_usuario: nombreUsuario,
+      mensaje: texto,
+      creado_en: new Date().toISOString()
+    };
+
+    const mensajesActuales = this.mensajesSubject.value;
+    this.mensajesSubject.next([...mensajesActuales, mensajeLocal]);
+
     const { error } = await this.supabase.from('mensajes').insert([
       { usuario_id: usuarioId, nombre_usuario: nombreUsuario, mensaje: texto }
     ]);

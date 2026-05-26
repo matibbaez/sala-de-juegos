@@ -27,6 +27,8 @@ export class ChatComponent implements OnInit {
   async ngOnInit() {
     this.usuarioActual = await this.authService.obtenerSesion();
 
+    this.chatService.inicializarChat();
+
     this.chatService.mensajes$.subscribe(historial => {
       this.mensajes = historial;
       this.cdr.detectChanges(); 
